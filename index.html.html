@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EduTrack Student Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f5fb;
+            color: #252b45;
+        }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 240px;
+            background: #25234a;
+            color: white;
+            padding: 30px 20px;
+        }
+
+        .logo {
+            font-size: 25px;
+            color: #a99cff;
+            margin-bottom: 40px;
+        }
+
+        .sidebar h4 {
+            color: #aaa8c5;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 14px;
+            margin-bottom: 10px;
+            color: #e2e0f5;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #514b91;
+        }
+
+
+        .main {
+            flex: 1;
+            padding: 30px;
+            overflow: hidden;
+        }
+
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 27px;
+            color: #25234a;
+        }
+
+        .header p {
+            color: #777;
+            margin-top: 8px;
+        }
+
+        .date {
+            background: white;
+            padding: 13px 18px;
+            border-radius: 8px;
+        }
+
+
+        .welcome {
+            background: linear-gradient(120deg, #6559c7, #9286ed);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .welcome p {
+            line-height: 1.6;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+        }
+
+        .stat-card p {
+            color: #777;
+            margin-bottom: 14px;
+        }
+
+        .stat-card h2 {
+            font-size: 28px;
+            color: #514b91;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 22px;
+        }
+
+        .panel {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 22px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+        }
+
+        .panel h2 {
+            font-size: 20px;
+            margin-bottom: 22px;
+            color: #25234a;
+        }
+
+        .course {
+            margin-bottom: 22px;
+        }
+
+        .course-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .course-info span:last-child {
+            color: #6559c7;
+            font-weight: bold;
+        }
+
+        .progress {
+            height: 9px;
+            background: #eceaf8;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .bar {
+            height: 100%;
+            background: #7669db;
+            border-radius: 10px;
+        }
+
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid #eee;
+            gap: 10px;
+        }
+
+        .schedule-item strong {
+            color: #514b91;
+        }
+
+        .schedule-item p {
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .assignment {
+            background: #f7f6ff;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #7669db;
+        }
+
+        .assignment h3 {
+            font-size: 15px;
+            margin-bottom: 7px;
+        }
+
+        .assignment p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+        }
+
+        @media(max-width: 1000px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 650px) {
+            .dashboard {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .main {
+                padding: 18px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+
+        <h2 class="logo">EduTrack</h2>
+
+        <h4>MAIN MENU</h4>
+
+        <a href="#home" class="active">🏠 Dashboard</a>
+        <a href="#courses">📚 My Courses</a>
+        <a href="#progress">📊 My Progress</a>
+        <a href="#schedule">📅 Schedule</a>
+        <a href="#assignments">📝 Assignments</a>
+        <a href="#footer">⚙️ Settings</a>
+
+    </aside>
+
+
+    <main class="main" id="home">
+
+        <div class="header">
+
+            <div>
+                <h1>Dashboard</h1>
+                <p>Track your learning and academic progress.</p>
+            </div>
+
+            <div class="date">
+                📅 Academic Year 2026-27
+            </div>
+
+        </div>
+
+        <section class="welcome">
+
+            <h2>Hello, Suraj! 👋</h2>
+
+            <p>
+                Welcome back to EduTrack.
+                Keep learning, stay focused and achieve your goals!
+            </p>
+
+        </section>
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <p>📚 Total Courses</p>
+                <h2>06</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>📊 Attendance</p>
+                <h2>88%</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>📝 Assignments</p>
+                <h2>04</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>🏆 Completed Tasks</p>
+                <h2>12</h2>
+            </div>
+
+        </section>
+
+        <section class="content">
+
+            <div>
+
+                <div class="panel" id="courses">
+
+                    <h2>My Learning Progress</h2>
+
+                    <div class="course">
+                        <div class="course-info">
+                            <span>Python Programming</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="bar" style="width:75%"></div>
+                        </div>
+                    </div>
+
+                    <div class="course">
+                        <div class="course-info">
+                            <span>HTML & CSS</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="bar" style="width:80%"></div>
+                        </div>
+                    </div>
+
+                    <div class="course">
+                        <div class="course-info">
+                            <span>Mathematics</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="bar" style="width:80%"></div>
+                        </div>
+                    </div>
+
+                    <div class="course">
+                        <div class="course-info">
+                            <span>Design Thinking</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="bar" style="width:90%"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel" id="assignments">
+
+                    <h2>Recent Assignments</h2>
+
+                    <div class="assignment">
+                        <h3>Python Programming</h3>
+                        <p>Complete functions practice</p>
+                        <p>Due Date: 12 November</p>
+                    </div>
+
+                    <div class="assignment">
+                        <h3>HTML & CSS</h3>
+                        <p>Create a personal website</p>
+                        <p>Due Date: 15 November</p>
+                    </div>
+
+                    <div class="assignment">
+                        <h3>Mathematics</h3>
+                        <p>Complete differentiation exercises</p>
+                        <p>Due Date: 18 November</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <div class="panel" id="schedule">
+
+                    <h2>Today's Schedule</h2>
+
+                    <div class="schedule-item">
+                        <div>
+                            <strong>Python</strong>
+                            <p>Programming Class</p>
+                        </div>
+                        <span>09:00 AM</span>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div>
+                            <strong>Mathematics</strong>
+                            <p>Lecture</p>
+                        </div>
+                        <span>10:00 AM</span>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div>
+                            <strong>Design Thinking</strong>
+                            <p>Project Session</p>
+                        </div>
+                        <span>12:00 PM</span>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div>
+                            <strong>HTML & CSS</strong>
+                            <p>Practical Session</p>
+                        </div>
+                        <span>02:00 PM</span>
+                    </div>
+
+                </div>
+
+                <div class="panel">
+
+                    <h2>Study Reminder</h2>
+
+                    <div class="assignment">
+                        <h3>💡 Keep Learning!</h3>
+                        <p>Practice coding every day and improve your skills.</p>
+                    </div>
+
+                    <div class="assignment">
+                        <h3>🎯 Weekly Goal</h3>
+                        <p>Complete your assignments and revise your subjects.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <footer id="footer">
+            © 2026 EduTrack | Student Dashboard
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>
